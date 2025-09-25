@@ -1,0 +1,3094 @@
+/*
+==============================================
+NEXUSTECH SOLUTIONS - PROFESSIONAL WEBSITE
+==============================================
+
+Archivo: styles.css
+Proyecto: Website Corporativo NexusTech Solutions
+Autor: Sistema de Desarrollo Web
+Fecha: Septiembre 2025
+Descripción: Estilos CSS para website empresarial moderno con 
+            diseño responsivo, animaciones y componentes interactivos.
+
+ESTRUCTURA DEL ARCHIVO:
+1. Variables CSS y Configuración Base
+2. Navegación (Navbar)
+3. Sección Hero
+4. Estadísticas Animadas
+5. Sección Misión/Visión/Valores
+6. Equipo de Trabajo
+7. Servicios
+8. Proceso de Trabajo
+9. Proyectos Destacados
+10. Testimonios
+11. Contacto
+12. Footer
+13. Modal de Contacto
+14. Responsividad Móvil
+15. Animaciones y Efectos
+
+TECNOLOGÍAS UTILIZADAS:
+- CSS3 (Variables, Grid, Flexbox, Animations)
+- Bootstrap 5.3.0 (Framework responsivo)
+- AOS (Animate On Scroll) Library
+- Glass Morphism Design
+- Mobile-First Responsive Design
+*/
+
+/* ============================= */
+/* 1. VARIABLES CSS GLOBALES     */
+/* ============================= */
+
+/**
+ * Define paleta de colores y gradientes principales del sitio
+ * Usando CSS Custom Properties para consistencia y fácil mantenimiento
+ */
+:root {
+            /* Colores principales del brand */
+            --primary: #2c3e50;      /* Azul oscuro corporativo */
+            --secondary: #3498db;    /* Azul claro tecnológico */
+            --accent: #e74c3c;       /* Rojo para llamadas a la acción */
+            --success: #27ae60;      /* Verde para estados exitosos */
+            --warning: #f39c12;      /* Naranja para advertencias */
+            --light: #ecf0f1;        /* Gris claro para backgrounds */
+            --dark: #2c3e50;         /* Color oscuro para texto */
+            
+            /* Gradiente principal usado en hero, footer y elementos destacados */
+            --gradient: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+        
+        /* ============================= */
+        /* 2. CONFIGURACIÓN BASE         */
+        /* ============================= */
+        
+        /**
+         * Configuración HTML base para sticky footer
+         * Establece altura completa del viewport
+         */
+        html {
+            height: 100%;
+        }
+        
+        /**
+         * CONFIGURACIÓN BODY - STICKY FOOTER LAYOUT
+         * 
+         * Implementa un layout flexbox vertical que garantiza:
+         * - Footer siempre al final de la página
+         * - Contenido principal ocupa el espacio disponible
+         * - Diseño responsivo en todos los dispositivos
+         * 
+         * Tipografía: Stack de fuentes modernas y legibles
+         * Layout: Flexbox column para sticky footer
+         */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Stack tipográfico moderno */
+            background-color: #f8f9fa; /* Fondo gris suave corporativo */
+            color: #333;               /* Color de texto principal */
+            line-height: 1.6;         /* Espaciado de línea óptimo para legibilidad */
+            min-height: 100vh;        /* Altura mínima completa del viewport */
+            display: flex;            /* Flexbox para layout sticky footer */
+            flex-direction: column;   /* Dirección vertical del layout */
+            margin: 0;               /* Reset de márgenes del navegador */
+            padding: 0;              /* Reset de padding del navegador */
+        }
+        
+        /**
+         * CONTENEDOR PRINCIPAL - FLEX GROW
+         * 
+         * El contenido principal se expande para ocupar todo el espacio
+         * disponible, empujando el footer hacia abajo automáticamente
+         */
+        main, .main-content {
+            flex: 1; /* Ocupa todo el espacio disponible entre navbar y footer */
+        }
+        
+        /* ================================================= */
+        /* 3. NAVEGACIÓN PRINCIPAL (NAVBAR)                 */
+        /* ================================================= */
+        
+        /**
+         * NAVBAR BASE - DISEÑO GLASS MORPHISM
+         * 
+         * Características principales:
+         * - Fondo semitransparente con efecto blur
+         * - Posicionamiento fijo en la parte superior
+         * - Transiciones suaves para efectos de scroll
+         * - Diseño moderno glass morphism
+         * - Compatible con Bootstrap navbar
+         */
+        .navbar {
+            background: rgba(44, 62, 80, 0.95);    /* Fondo semitransparente del color primario */
+            backdrop-filter: blur(20px);            /* Efecto blur glass morphism */
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1); /* Sombra sutil para profundidad */
+            padding: 15px 0;                        /* Espaciado interno vertical */
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Transición suave personalizada */
+            border-bottom: 1px solid rgba(255,255,255,0.1); /* Borde inferior sutil */
+        }
+        
+        /**
+         * NAVBAR ESTADO SCROLLED - COMPACTO
+         * 
+         * Se aplica cuando el usuario hace scroll hacia abajo
+         * Proporciona una experiencia más compacta y elegante
+         */
+        .navbar.scrolled {
+            background: rgba(44, 62, 80, 0.98);    /* Fondo más opaco al hacer scroll */
+            backdrop-filter: blur(25px);            /* Mayor efecto blur */
+            padding: 10px 0;                       /* Padding reducido para aspecto compacto */
+            box-shadow: 0 4px 30px rgba(0,0,0,0.2); /* Sombra más pronunciada */
+            border-bottom: 1px solid rgba(52, 152, 219, 0.3); /* Borde azul sutil */
+        }
+        
+        /**
+         * NAVBAR BRAND - LOGO DE LA EMPRESA
+         * 
+         * Implementa el logo/marca de la empresa con:
+         * - Gradiente aplicado al texto usando CSS background-clip
+         * - Flexbox para alineación perfecta del ícono y texto
+         * - Animación sutil en el ícono
+         * - Efectos de transición suaves
+         */
+        .navbar-brand {
+            font-size: 1.8rem;                     /* Tamaño de fuente destacado */
+            font-weight: 700;                      /* Peso bold para impacto visual */
+            color: white !important;               /* Color fallback para compatibilidad */
+            text-decoration: none;                 /* Remover subrayado de enlace */
+            background: var(--gradient);           /* Gradiente de fondo */
+            background-clip: text;                 /* Aplicar gradiente solo al texto */
+            -webkit-background-clip: text;         /* Compatibilidad WebKit */
+            -webkit-text-fill-color: transparent;  /* Hacer texto transparente para mostrar gradiente */
+            transition: all 0.3s ease;            /* Transición suave para efectos hover */
+            display: flex;                         /* Flexbox para layout del logo */
+            align-items: center;                   /* Alineación vertical centrada */
+            gap: 10px;                            /* Espacio entre ícono y texto */
+        }
+        
+        /**
+         * ÍCONO DEL NAVBAR BRAND
+         * 
+         * Ícono animado que representa la tecnología/CPU
+         * con efectos de pulsado continuo
+         */
+        .navbar-brand i {
+            background: var(--gradient);           /* Mismo gradiente que el texto */
+            background-clip: text;                 /* Aplicar gradiente al ícono */
+            -webkit-background-clip: text;         /* Compatibilidad WebKit */
+            -webkit-text-fill-color: transparent;  /* Transparencia para mostrar gradiente */
+            font-size: 2rem;                      /* Tamaño destacado del ícono */
+            animation: pulse 2s infinite;          /* Animación de pulsado continua */
+        }
+        
+        .navbar-brand:hover {
+            transform: scale(1.05);
+            filter: brightness(1.2);
+        }
+        
+        /**
+         * ANIMACIÓN PULSE - ÍCONO DEL NAVBAR
+         * 
+         * Keyframes para la animación de pulsado del ícono CPU
+         * Efecto sutil que da vida al logo de la marca
+         */
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }      /* Estado normal */
+            50% { transform: scale(1.1); }        /* Estado expandido */
+        }
+        
+        /**
+         * ENLACES DE NAVEGACIÓN - DISEÑO AVANZADO
+         * 
+         * Implementa efectos modernos de hover con:
+         * - Transiciones suaves personalizadas
+         * - Efecto shimmer con pseudo-elemento
+         * - Elevación 3D en hover
+         * - Estados active y hover diferenciados
+         */
+        .nav-link {
+            color: rgba(255,255,255,0.9) !important; /* Color principal semi-transparente */
+            font-weight: 500;                        /* Peso medio para legibilidad */
+            font-size: 1rem;                        /* Tamaño estándar */
+            margin: 0 5px;                          /* Espaciado horizontal entre enlaces */
+            padding: 10px 15px !important;          /* Área de click generosa */
+            border-radius: 8px;                     /* Bordes redondeados modernos */
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Curva de transición personalizada */
+            position: relative;                      /* Para posicionar pseudo-elementos */
+            overflow: hidden;                        /* Ocultar desbordamiento del efecto shimmer */
+        }
+        
+        /**
+         * EFECTO SHIMMER - PSEUDO-ELEMENTO
+         * 
+         * Crea un efecto de brillo que se desplaza horizontalmente
+         * al pasar el cursor sobre los enlaces de navegación
+         */
+        .nav-link::before {
+            content: '';                            /* Pseudo-elemento vacío */
+            position: absolute;                     /* Posicionamiento absoluto */
+            top: 0;                                /* Desde la parte superior */
+            left: -100%;                           /* Inicialmente fuera de vista (izquierda) */
+            width: 100%;                           /* Ancho completo del enlace */
+            height: 100%;                          /* Alto completo del enlace */
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent); /* Gradiente shimmer */
+            transition: left 0.5s;                 /* Animación del desplazamiento */
+        }
+        
+        /**
+         * ACTIVACIÓN DEL EFECTO SHIMMER
+         * 
+         * Al hacer hover, el efecto shimmer se desplaza de izquierda a derecha
+         */
+        .nav-link:hover::before {
+            left: 100%;                            /* Desplazar hacia la derecha */
+        }
+        
+        /**
+         * ESTADO HOVER - ENLACES DE NAVEGACIÓN
+         * 
+         * Efectos combinados de hover que incluyen:
+         * - Cambio de color y fondo
+         * - Elevación 3D con transform
+         * - Sombra con color del brand
+         */
+        .nav-link:hover {
+            color: white !important;                          /* Color blanco puro en hover */
+            background: rgba(52, 152, 219, 0.2);            /* Fondo azul semitransparente */
+            transform: translateY(-2px);                     /* Elevación sutil hacia arriba */
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3); /* Sombra azul para profundidad */
+        }
+        
+        /**
+         * ESTADO ACTIVO - ENLACE DE NAVEGACIÓN
+         * 
+         * Estilo para el enlace de la sección actualmente visible
+         * Usa el gradiente principal del brand para destacarlo
+         */
+        .nav-link.active {
+            color: white !important;                         /* Color blanco para contraste */
+            background: var(--gradient);                     /* Fondo con gradiente del brand */
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4); /* Sombra más intensa */
+        }
+        
+        /**
+         * ===================================================
+         * MENÚ DROPDOWN - NAVEGACIÓN OPTIMIZADA MÓVIL
+         * ===================================================
+         * 
+         * Sistema de dropdown para optimizar la navegación
+         * especialmente en dispositivos móviles donde el espacio es limitado
+         */
+        
+        /**
+         * CONTENEDOR DROPDOWN
+         * 
+         * Posicionamiento relativo para el menú desplegable
+         */
+        .navbar-nav .dropdown {
+            position: relative; /* Base para posicionamiento absoluto del menú */
+        }
+        
+        /**
+         * BOTÓN DROPDOWN TOGGLE
+         * 
+         * Botón que activa/desactiva el menú desplegable
+         * con ícono personalizado de Bootstrap Icons
+         */
+        .navbar-nav .dropdown-toggle {
+            position: relative;    /* Para posicionamiento del ícono */
+            display: flex;         /* Flexbox para alineación */
+            align-items: center;   /* Alineación vertical centrada */
+            gap: 8px;             /* Espacio entre texto e ícono */
+        }
+        
+        /**
+         * ÍCONO DROPDOWN - PERSONALIZADO
+         * 
+         * Reemplaza el ícono por defecto de Bootstrap con
+         * un ícono personalizado de Bootstrap Icons con animación
+         */
+        .navbar-nav .dropdown-toggle::after {
+            border: none;                    /* Remover borde por defecto */
+            content: '\F282';               /* Código Unicode de Bootstrap Icon (chevron-down) */
+            font-family: 'bootstrap-icons'; /* Fuente de iconos */
+            font-size: 0.8rem;             /* Tamaño del ícono */
+            transition: transform 0.3s ease; /* Transición para rotación */
+            margin-left: 5px;              /* Separación del texto */
+        }
+        
+        /**
+         * ÍCONO DROPDOWN EXPANDIDO
+         * 
+         * Rotación del ícono cuando el dropdown está abierto
+         */
+        .navbar-nav .dropdown-toggle[aria-expanded="true"]::after {
+            transform: rotate(180deg);
+        }
+        
+        .navbar-nav .dropdown-menu {
+            background: rgba(44, 62, 80, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 12px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            margin-top: 8px;
+            padding: 10px 0;
+            min-width: 220px;
+            transform: translateY(-10px);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        
+        .navbar-nav .dropdown-menu.show {
+            transform: translateY(0);
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .navbar-nav .dropdown-item {
+            color: rgba(255,255,255,0.9);
+            padding: 12px 20px;
+            transition: all 0.3s ease;
+            border-radius: 8px;
+            margin: 2px 10px;
+            font-weight: 500;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .navbar-nav .dropdown-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 3px;
+            height: 100%;
+            background: var(--secondary);
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .navbar-nav .dropdown-item:hover,
+        .navbar-nav .dropdown-item:focus {
+            background: linear-gradient(135deg, rgba(52, 152, 219, 0.2), rgba(52, 152, 219, 0.1));
+            color: white;
+            transform: translateX(8px);
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.2);
+        }
+        
+        .navbar-nav .dropdown-item:hover::before {
+            transform: scaleY(1);
+        }
+        
+        /**
+         * MENÚ HAMBURGUESA - BOTÓN TOGGLE
+         * 
+         * Sistema de navegación móvil con efectos visuales mejorados:
+         * - Botón sin bordes para diseño limpio
+         * - Fondo semitransparente con glass morphism
+         * - Transiciones suaves en todos los estados
+         * - Indicador visual de focus para accesibilidad
+         */
+        .navbar-toggler {
+            border: none;                          /* Elimina bordes por defecto */
+            padding: 8px 10px;                    /* Padding confortable para touch */
+            background: rgba(255,255,255,0.1);    /* Fondo semitransparente */
+            border-radius: 8px;                   /* Esquinas redondeadas */
+            transition: all 0.3s ease;           /* Transiciones suaves */
+            position: relative;                   /* Para pseudo-elementos si es necesario */
+            z-index: 1001;                       /* Prioridad sobre otros elementos */
+        }
+        
+        /**
+         * Estado de focus - Accesibilidad
+         * Muestra un outline azul cuando se navega por teclado
+         */
+        .navbar-toggler:focus {
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.3); /* Outline azul para accesibilidad */
+            outline: none;                        /* Remueve el outline nativo */
+        }
+        
+        /**
+         * Estado de hover - Interacción visual
+         * Aumenta el contraste y escala ligeramente el botón
+         */
+        .navbar-toggler:hover {
+            background: rgba(255,255,255,0.2);    /* Fondo más visible en hover */
+            transform: scale(1.05);               /* Ligero aumento de escala */
+        }
+        
+        /**
+         * Icono del hamburguesa - SVG customizado
+         * 
+         * Características técnicas:
+         * - SVG inline en base64 para mejor rendimiento
+         * - Color blanco semitransparente para suavidad
+         * - Líneas redondeadas para diseño moderno
+         * - Transición para futuras animaciones
+         */
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.8%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='m4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+            transition: all 0.3s ease;            /* Preparado para animaciones futuras */
+            width: 24px;                          /* Tamaño consistente */
+            height: 24px;                         /* Proporción cuadrada */
+        }
+        
+        /**
+         * Animación del icono cuando está activo
+         * Se aplica cuando el menú está expandido
+         */
+        .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
+            transform: rotate(90deg);             /* Rotación del icono cuando está abierto */
+            opacity: 0.9;                        /* Ligera transparencia */
+        }
+        
+        /**
+         * RESPONSIVE NAVIGATION - BREAKPOINT MÓVIL/TABLET (≤ 991px)
+         * 
+         * Transformación completa del navbar para dispositivos móviles:
+         * - Menú desplegable con glass morphism avanzado
+         * - Animaciones de entrada escalonadas
+         * - Mejor usabilidad táctil
+         * - Integración perfecta con el botón hamburguesa
+         */
+        @media (max-width: 991px) {
+            /**
+             * Contenedor principal del menú móvil
+             * 
+             * Características visuales:
+             * - Fondo oscuro semitransparente para contraste
+             * - Blur effect para modernidad
+             * - Bordes redondeados consistentes con el brand
+             * - Separación visual del navbar principal
+             * - Borde sutil para definición
+             */
+            .navbar-nav {
+                background: rgba(44, 62, 80, 0.98);  /* Fondo oscuro semitransparente */
+                backdrop-filter: blur(20px);         /* Efecto de desenfoque moderno */
+                -webkit-backdrop-filter: blur(20px); /* Compatibilidad Safari */
+                border-radius: 12px;                 /* Esquinas redondeadas */
+                margin-top: 15px;                    /* Separación del navbar */
+                padding: 20px 0;                     /* Padding vertical generoso */
+                border: 1px solid rgba(255,255,255,0.1); /* Borde sutil */
+                box-shadow: 0 10px 40px rgba(0,0,0,0.3); /* Sombra para profundidad */
+                animation: slideDown 0.3s ease-out;  /* Animación de entrada */
+            }
+            
+            /**
+             * Enlaces de navegación en móvil
+             * 
+             * Optimización táctil y visibilidad:
+             * - Área de toque más grande (mínimo 44px de altura)
+             * - Margenes para evitar clicks accidentales
+             * - Padding generoso para comodidad
+             * - Bordes redondeados individuales
+             * - Visibilidad forzada para corregir problemas
+             */
+            .nav-link {
+                margin: 5px 15px;                   /* Márgenes para separación */
+                padding: 12px 20px !important;      /* Padding táctil óptimo */
+                border-radius: 10px;                /* Esquinas redondeadas individuales */
+                transition: all 0.2s ease;         /* Transiciones rápidas */
+                display: block !important;          /* CORREGIDO: Fuerza visualización */
+                min-height: 44px;                  /* Mínimo para accesibilidad táctil */
+                opacity: 1 !important;             /* CORREGIDO: Fuerza visibilidad */
+                visibility: visible !important;     /* CORREGIDO: Asegura que sea visible */
+                color: rgba(255,255,255,0.9) !important; /* CORREGIDO: Color visible */
+                z-index: 1000;                      /* CORREGIDO: Prioridad visual */
+            }
+            
+            .navbar-nav .dropdown-menu {
+                background: rgba(52, 152, 219, 0.1);
+                border: 1px solid rgba(255,255,255,0.2);
+                box-shadow: inset 0 2px 10px rgba(0,0,0,0.1);
+                margin: 10px 20px;
+                position: static !important;
+                transform: none !important;
+                opacity: 1 !important;
+                visibility: visible !important;
+                width: calc(100% - 40px);
+                backdrop-filter: blur(10px);
+            }
+            
+            .navbar-nav .dropdown-item {
+                color: rgba(255,255,255,0.9);
+                font-size: 0.95rem;
+                padding: 10px 20px;
+                margin: 2px 10px;
+                border-radius: 8px;
+            }
+            
+            .navbar-nav .dropdown-item:hover {
+                background: rgba(255,255,255,0.15);
+                transform: translateX(5px);
+                padding-left: 25px;
+            }
+            
+            /**
+             * Contenedor del colapso - Comportamiento responsive
+             * 
+             * Gestión inteligente del espacio vertical:
+             * - Altura máxima del 80% del viewport
+             * - Scroll interno si es necesario
+             * - Scrollbar personalizada con estilo del brand
+             * - Transiciones suaves para show/hide
+             */
+            .navbar-collapse {
+                max-height: 80vh;                    /* Límite de altura viewport */
+                overflow-y: auto;                    /* Scroll vertical si es necesario */
+                scrollbar-width: thin;               /* Scrollbar delgada en Firefox */
+                scrollbar-color: rgba(52, 152, 219, 0.5) transparent; /* Colores del scroll */
+                transition: max-height 0.3s ease;   /* Animación suave de altura */
+            }
+            
+            /**
+             * Estado expandido - Altura completa
+             * Asegura que el contenido sea visible cuando el menú está abierto
+             */
+            .navbar-collapse.show {
+                max-height: 80vh !important;        /* Fuerza altura máxima cuando expandido */
+                opacity: 1 !important;              /* Asegura visibilidad completa */
+                visibility: visible !important;     /* Fuerza visibilidad */
+            }
+            
+            /**
+             * Estado colapsado - Altura cero
+             * Permite transición suave entre estados
+             */
+            .navbar-collapse:not(.show) {
+                max-height: 0 !important;           /* Altura cero cuando colapsado */
+                overflow: hidden !important;        /* Oculta contenido desbordante */
+                opacity: 0;                         /* Invisible cuando colapsado */
+            }
+            
+            .navbar-collapse::-webkit-scrollbar {
+                width: 4px;
+            }
+            
+            .navbar-collapse::-webkit-scrollbar-track {
+                background: transparent;
+            }
+            
+            .navbar-collapse::-webkit-scrollbar-thumb {
+                background: rgba(52, 152, 219, 0.5);
+                border-radius: 2px;
+            }
+        }
+        
+        /* Animaciones de entrada para el mobile menu */
+        /**
+         * RESPONSIVE - BREAKPOINT TABLET/MÓVIL (< 991px)
+         * 
+         * Configuración especial para dispositivos medianos y pequeños:
+         * 
+         * 1. Animación de Entrada para Elementos de Menú
+         * - Estado inicial: Invisible y desplazado
+         * - Animación progresiva con retrasos escalonados
+         * - Efecto cascade/waterfall para mejor UX
+         */
+        @media (max-width: 991px) {
+            /**
+             * Estado inicial de los elementos del menú móvil
+             * 
+             * PROBLEMA CORREGIDO: Los elementos estaban invisibles por defecto
+             * SOLUCIÓN: Hacerlos visibles y aplicar animación solo durante la transición
+             * 
+             * - opacity: 1 → CORREGIDO: Visible por defecto
+             * - transform: none → CORREGIDO: Posición normal
+             * - Animación aplicada condicionalmente
+             */
+            .navbar-nav .nav-item {
+                opacity: 1;                         /* CORREGIDO: Visible por defecto */
+                transform: translateX(0);           /* CORREGIDO: Posición normal */
+                transition: all 0.3s ease;         /* Transición suave */
+            }
+            
+            /**
+             * Animación de entrada aplicada solo cuando es necesario
+             * Se puede activar via JavaScript o clases específicas
+             */
+            .navbar-nav .nav-item.animate-in {
+                animation: slideInLeft 0.3s ease forwards; /* Animación de entrada */
+            }
+            
+            /**
+             * SISTEMA DE RETRASOS ESCALONADOS
+             * 
+             * Cada elemento del menú aparece con un retraso progresivo
+             * creando un efecto waterfall elegante:
+             * - Incremento de 0.1s por elemento
+             * - Máximo 8 elementos soportados
+             * - Mejora la percepción de la interfaz
+             */
+            .navbar-nav .nav-item:nth-child(1) { animation-delay: 0.1s; }
+            .navbar-nav .nav-item:nth-child(2) { animation-delay: 0.2s; }
+            .navbar-nav .nav-item:nth-child(3) { animation-delay: 0.3s; }
+            .navbar-nav .nav-item:nth-child(4) { animation-delay: 0.4s; }
+            .navbar-nav .nav-item:nth-child(5) { animation-delay: 0.5s; }
+            .navbar-nav .nav-item:nth-child(6) { animation-delay: 0.6s; }
+            .navbar-nav .nav-item:nth-child(7) { animation-delay: 0.7s; }
+            .navbar-nav .nav-item:nth-child(8) { animation-delay: 0.8s; }
+        }
+        
+        /**
+         * KEYFRAME: SLIDE IN LEFT
+         * 
+         * Animación de deslizamiento desde la izquierda
+         * Estado final: completamente visible y en posición
+         */
+        @keyframes slideInLeft {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        /**
+         * KEYFRAME: SLIDE DOWN
+         * 
+         * Animación de deslizamiento hacia abajo para menú móvil
+         * Efecto suave de aparición desde arriba
+         */
+        @keyframes slideDown {
+            from {
+                opacity: 0;                          /* Comienza invisible */
+                transform: translateY(-20px);        /* Desplazado hacia arriba */
+            }
+            to {
+                opacity: 1;                          /* Termina completamente visible */
+                transform: translateY(0);            /* En su posición final */
+            }
+        }
+        
+        /* Efectos adicionales para mejor UX */
+        .navbar-nav .nav-item {
+            position: relative;
+        }
+        
+        .navbar-nav .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 2px;
+            background: var(--warning);
+            border-radius: 1px;
+        }
+        
+        /* Mejoras para accesibilidad */
+        .navbar-nav .nav-link:focus,
+        .navbar-nav .dropdown-item:focus {
+            outline: 2px solid var(--secondary);
+            outline-offset: 2px;
+        }
+        
+        /* Hover effect en desktop para dropdown */
+        @media (min-width: 992px) {
+            .navbar-nav .dropdown:hover .dropdown-menu {
+                display: block;
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+            
+            .navbar-nav .dropdown:hover .dropdown-toggle::after {
+                transform: rotate(180deg);
+            }
+        }
+        
+        /* Efecto de glass morphism más pronunciado */
+        @supports (backdrop-filter: blur(20px)) {
+            .navbar {
+                background: rgba(44, 62, 80, 0.85);
+            }
+            
+            .navbar.scrolled {
+                background: rgba(44, 62, 80, 0.95);
+            }
+            
+            .navbar-nav .dropdown-menu {
+                background: rgba(44, 62, 80, 0.9);
+            }
+            
+            @media (max-width: 991px) {
+                .navbar-nav {
+                    background: rgba(44, 62, 80, 0.95);
+                }
+            }
+        }
+        
+        /* ================================================= */
+        /* 4. SECCIÓN HERO - PÁGINA DE INICIO               */
+        /* ================================================= */
+        
+        /**
+         * HERO SECTION - SECCIÓN PRINCIPAL DE BIENVENIDA
+         * 
+         * Primera impresión del sitio web con:
+         * - Gradiente de fondo del brand
+         * - Padding generoso para presencia visual
+         * - Overlay decorativo con SVG
+         * - Posicionamiento relativo para capas
+         * 
+         * Funciones principales:
+         * - Presentar la empresa y su propuesta de valor
+         * - Call-to-actions principales
+         * - Establecer la identidad visual del sitio
+         */
+        .hero-section {
+            background: var(--gradient);    /* Gradiente principal del brand */
+            color: white;                  /* Texto blanco para contraste */
+            padding: 120px 0;             /* Padding vertical generoso */
+            position: relative;           /* Base para capas decorativas */
+            overflow: hidden;             /* Ocultar desbordamientos del overlay */
+        }
+        
+        /**
+         * OVERLAY DECORATIVO - PSEUDO-ELEMENTO
+         * 
+         * Capa decorativa con SVG inline que crea un efecto
+         * geométrico sutil en la parte inferior del hero
+         * 
+         * SVG: Polígono diagonal semitransparente
+         */
+        .hero-section::before {
+            content: '';                  /* Pseudo-elemento vacío */
+            position: absolute;           /* Posicionamiento absoluto */
+            top: 0;                      /* Desde arriba */
+            left: 0;                     /* Desde la izquierda */
+            right: 0;                    /* Hasta la derecha */
+            bottom: 0;                   /* Hasta abajo */
+            /* SVG inline con polígono decorativo */
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="rgba(255,255,255,0.1)"><polygon points="0,100 1000,0 1000,100"/></svg>') no-repeat bottom;
+            background-size: cover;       /* Cubrir toda el área */
+        }
+        
+        /**
+         * CONTENIDO DEL HERO
+         * 
+         * Contenedor principal del contenido del hero
+         * con z-index superior para aparecer sobre el overlay
+         */
+        .hero-content {
+            position: relative;           /* Para aplicar z-index */
+            z-index: 2;                  /* Por encima del overlay decorativo */
+        }
+        
+        /* ================================================= */
+        /* 4.1 BOTONES CTA - CALL TO ACTION                 */
+        /* ================================================= */
+        
+        /**
+         * BOTÓN CTA PRINCIPAL - CALL TO ACTION
+         * 
+         * Botón de acción primario con efectos avanzados:
+         * - Color de acento del brand (rojo corporativo)
+         * - Efecto shimmer con pseudo-elemento
+         * - Transiciones suaves en todos los estados
+         * - Tipografía en mayúsculas para impacto
+         * - Bordes redondeados modernos
+         * 
+         * Uso: Acciones principales como "Conocer Servicios"
+         */
+        .cta-button {
+            background: var(--accent);        /* Color de acento (rojo corporativo) */
+            border: none;                     /* Sin borde para diseño limpio */
+            padding: 12px 30px;              /* Padding generoso para área de click */
+            border-radius: 25px;             /* Bordes redondeados modernos */
+            font-weight: 600;                /* Peso semi-bold para énfasis */
+            transition: all 0.3s ease;       /* Transición suave para todos los cambios */
+            text-transform: uppercase;        /* Texto en mayúsculas para impacto */
+            letter-spacing: 1px;             /* Espaciado de letras para elegancia */
+            cursor: pointer;                 /* Cursor pointer para interactividad */
+            position: relative;              /* Para posicionar pseudo-elemento */
+            overflow: hidden;                /* Ocultar desbordamiento del efecto shimmer */
+        }
+        
+        /**
+         * EFECTO SHIMMER CTA - PSEUDO-ELEMENTO
+         * 
+         * Efecto de brillo que se desplaza horizontalmente
+         * Similar al implementado en los enlaces de navegación
+         */
+        .cta-button::before {
+            content: '';                     /* Pseudo-elemento vacío */
+            position: absolute;              /* Posicionamiento absoluto */
+            top: 0;                         /* Desde arriba */
+            left: -100%;                    /* Inicialmente fuera de vista */
+            width: 100%;                    /* Ancho completo del botón */
+            height: 100%;                   /* Alto completo del botón */
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent); /* Gradiente shimmer */
+            transition: left 0.5s;          /* Animación del desplazamiento */
+        }
+        
+        /**
+         * ACTIVACIÓN SHIMMER CTA
+         * 
+         * Al hacer hover, activa el efecto de brillo
+         */
+        .cta-button:hover::before {
+            left: 100%;                     /* Desplazar hacia la derecha */
+        }
+        
+        .cta-button:hover {
+            background: #c0392b;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(231, 76, 60, 0.5);
+        }
+        
+        /**
+         * ESTADO ACTIVO CTA
+         * 
+         * Elimina la elevación cuando el botón está siendo presionado
+         */
+        .cta-button:active {
+            transform: translateY(0px);       /* Vuelve a posición normal al presionar */
+        }
+        
+        /**
+         * BOTÓN OUTLINE SECUNDARIO
+         * 
+         * Botón secundario con estilo outline para acciones menos prioritarias
+         * Mantiene la misma estética pero con jerarquía visual diferente
+         * 
+         * Características:
+         * - Borde blanco sin relleno
+         * - Mismo sistema de efectos que el CTA principal
+         * - Padding ligeramente menor para diferenciación
+         * 
+         * Uso: Acciones secundarias como "Ver Proyectos"
+         */
+        .btn-outline-light {
+            border: 2px solid white;          /* Borde blanco característico del outline */
+            color: white;                     /* Texto blanco para contraste */
+            padding: 10px 28px;              /* Padding ligeramente menor que CTA */
+            border-radius: 25px;             /* Mismos bordes redondeados */
+            font-weight: 600;                /* Peso consistente con CTA */
+            transition: all 0.3s ease;       /* Misma transición suave */
+            text-transform: uppercase;        /* Tipografía consistente */
+            letter-spacing: 1px;             /* Espaciado consistente */
+            cursor: pointer;                 /* Cursor interactivo */
+            position: relative;              /* Para pseudo-elemento shimmer */
+            overflow: hidden;                /* Ocultar desbordamiento shimmer */
+        }
+        
+        /**
+         * EFECTO SHIMMER OUTLINE - PSEUDO-ELEMENTO
+         * 
+         * Mismo efecto shimmer adaptado para el botón outline
+         */
+        .btn-outline-light::before {
+            content: '';                     /* Pseudo-elemento vacío */
+            position: absolute;              /* Posicionamiento absoluto */
+            top: 0;                         /* Desde arriba */
+            left: -100%;                    /* Fuera de vista inicialmente */
+            width: 100%;                    /* Ancho completo */
+            height: 100%;
+            background: white;
+            transition: left 0.3s ease;
+            z-index: -1;
+        }
+        
+        .btn-outline-light:hover::before {
+            left: 0;
+        }
+        
+        .btn-outline-light:hover {
+            color: var(--primary);
+            border-color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 255, 255, 0.3);
+        }
+        
+        .btn-outline-light:active {
+            transform: translateY(0px);
+        }
+        
+        /* Cards */
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+        
+        .card-title {
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        /* Team Members */
+        .team-member-img {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid var(--secondary);
+            margin: 0 auto 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .team-member-img:hover {
+            border-color: var(--accent);
+            transform: scale(1.05);
+        }
+        
+        .role-badge {
+            background: var(--gradient);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        /* ================================================= */
+        /* 5. SECCIÓN DE ESTADÍSTICAS ANIMADAS              */
+        /* ================================================= */
+        
+        /**
+         * STATS SECTION - MÉTRICAS DE LA EMPRESA
+         * 
+         * Sección que muestra estadísticas clave de la empresa
+         * con números animados que se incrementan al hacer scroll
+         * 
+         * Características:
+         * - Fondo con gradiente del brand
+         * - Animación de contadores JavaScript
+         * - Diseño centrado y minimalista
+         * - Impacto visual con números grandes
+         */
+        .stats-section {
+            background: var(--gradient);    /* Fondo con gradiente corporativo */
+            color: white;                  /* Texto blanco para contraste */
+            padding: 80px 0;              /* Padding vertical generoso */
+            margin: 60px 0;               /* Separación de otras secciones */
+        }
+        
+        /**
+         * ELEMENTO INDIVIDUAL DE ESTADÍSTICA
+         * 
+         * Container para cada métrica individual
+         * con alineación centrada y padding uniforme
+         */
+        .stat-item {
+            text-align: center;           /* Centrado del contenido */
+            padding: 20px;               /* Padding interno para respiración */
+        }
+        
+        /**
+         * NÚMERO DE LA ESTADÍSTICA
+         * 
+         * Estilo para el número principal de cada estadística
+         * Diseñado para máximo impacto visual
+         */
+        .stat-number {
+            font-size: 3rem;             /* Tamaño grande para impacto */
+            font-weight: bold;            /* Peso bold para énfasis */
+            display: block;               /* Display block para control completo */
+            color: var(--light);          /* Color claro para contraste */
+        }
+        
+        /**
+         * ETIQUETA DE LA ESTADÍSTICA
+         * 
+         * Descripción textual de lo que representa el número
+         * Con estilo más sutil pero legible
+         */
+        .stat-label {
+            font-size: 1.1rem;           /* Tamaño moderado */
+            margin-top: 10px;            /* Separación del número */
+            opacity: 0.9;                /* Transparencia sutil para jerarquía visual */
+        }
+        
+        /* ================================================= */
+        /* 6. SECCIÓN MISIÓN, VISIÓN Y VALORES              */
+        /* ================================================= */
+        
+        /**
+         * MVV SECTION - CONTENEDOR PRINCIPAL
+         * 
+         * Sección que presenta los principios fundamentales de la empresa:
+         * - Misión (propósito y razón de ser)
+         * - Visión (aspiraciones futuras)
+         * - Valores (principios fundamentales)
+         * 
+         * Características de diseño:
+         * - Gradiente de fondo sutil y profesional
+         * - Espaciado generoso para claridad
+         * - Layout de cards para organizar información
+         */
+        .mvv-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); /* Gradiente gris suave */
+            padding: 80px 0;                    /* Padding vertical generoso */
+            margin: 60px 0;                     /* Separación de otras secciones */
+        }
+        
+        /**
+         * CARDS MVV - CONTENEDORES INDIVIDUALES
+         * 
+         * Tarjetas que contienen cada uno de los elementos MVV
+         * con efectos hover sofisticados y diseño moderno
+         * 
+         * Características:
+         * - Fondo blanco para contraste con la sección
+         * - Bordes redondeados modernos (20px)
+         * - Sombra sutil para profundidad
+         * - Altura uniforme con flexbox
+         * - Barra decorativa superior con gradiente
+         */
+        .mvv-card {
+            background: white;                  /* Fondo blanco limpio */
+            border-radius: 20px;               /* Bordes redondeados modernos */
+            padding: 40px 30px;                /* Padding interno generoso */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1); /* Sombra suave para profundidad */
+            transition: all 0.3s ease;         /* Transición suave para hover */
+            height: 100%;                      /* Altura uniforme en grid */
+            position: relative;                /* Para posicionar barra decorativa */
+            overflow: hidden;                  /* Ocultar desbordamientos */
+        }
+        
+        /**
+         * BARRA DECORATIVA MVV - PSEUDO-ELEMENTO
+         * 
+         * Elemento decorativo en la parte superior de cada card
+         * que utiliza el gradiente corporativo para consistencia visual
+         */
+        .mvv-card::before {
+            content: '';                       /* Pseudo-elemento vacío */
+            position: absolute;                /* Posicionamiento absoluto */
+            top: 0;                           /* En la parte superior */
+            left: 0;                          /* Desde la izquierda */
+            right: 0;                         /* Hasta la derecha */
+            height: 5px;                      /* Altura de la barra decorativa */
+            background: var(--gradient);      /* Gradiente corporativo */
+        }
+        
+        .mvv-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        
+        .mvv-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            font-size: 2.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .mvv-mission .mvv-icon {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+        }
+        
+        .mvv-vision .mvv-icon {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+        }
+        
+        .mvv-values .mvv-icon {
+            background: linear-gradient(135deg, #27ae60, #229954);
+            color: white;
+        }
+        
+        .mvv-icon:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+        
+        .mvv-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .mvv-mission .mvv-title {
+            color: #e74c3c;
+        }
+        
+        .mvv-vision .mvv-title {
+            color: #3498db;
+        }
+        
+        .mvv-values .mvv-title {
+            color: #27ae60;
+        }
+        
+        .mvv-description {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            text-align: center;
+            color: #666;
+            margin-bottom: 25px;
+        }
+        
+        .mvv-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .mvv-list li {
+            padding: 8px 0;
+            position: relative;
+            padding-left: 30px;
+            font-weight: 500;
+            color: #555;
+        }
+        
+        .mvv-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            top: 8px;
+            color: #27ae60;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        /* ================================================= */
+        /* 7. SECCIÓN DE SERVICIOS                          */
+        /* ================================================= */
+        
+        /**
+         * SERVICE ICON - ICONOS DE SERVICIOS
+         * 
+         * Iconos circulares que representan cada servicio ofrecido
+         * con efectos hover dinámicos y diseño consistente
+         * 
+         * Características:
+         * - Forma circular perfecta (80x80px)
+         * - Gradiente corporativo de fondo
+         * - Centrado automático con flexbox
+         * - Efectos hover con escala y rotación
+         * - Tamaño de ícono destacado (2rem)
+         * 
+         * Servicios incluidos:
+         * - Desarrollo de Software
+         * - Cloud Computing
+         * - Analítica de Datos
+         * - Consultoría IT
+         * - Soporte Técnico
+         */
+        .service-icon {
+            background: var(--gradient);      /* Gradiente corporativo de fondo */
+            color: white;                    /* Icono blanco para contraste */
+            width: 80px;                     /* Ancho fijo circular */
+            height: 80px;                    /* Alto fijo circular */
+            border-radius: 50%;              /* Forma circular perfecta */
+            display: flex;                   /* Flexbox para centrado */
+            align-items: center;             /* Centrado vertical */
+            justify-content: center;         /* Centrado horizontal */
+            margin: 0 auto 20px;           /* Centrado y separación inferior */
+            font-size: 2rem;               /* Tamaño destacado del ícono */
+            transition: all 0.3s ease;      /* Transición suave para hover */
+        }
+        
+        /**
+         * SERVICE ICON HOVER - EFECTO DINÁMICO
+         * 
+         * Efecto combinado de escala y rotación que da
+         * vida a los iconos al pasar el cursor
+         */
+        .service-icon:hover {
+            transform: scale(1.1) rotate(5deg); /* Agranda y rota ligeramente */
+        }
+        
+        /* ================================================= */
+        /* 8. TIMELINE - LÍNEA DE TIEMPO PROCESO DE TRABAJO */
+        /* ================================================= */
+        
+        /**
+         * TIMELINE CONTAINER - CONTENEDOR PRINCIPAL
+         * 
+         * Sistema de timeline vertical que muestra el proceso
+         * de trabajo paso a paso con diseño alternante
+         * 
+         * Características:
+         * - Línea central vertical como eje principal
+         * - Layout alternante (izquierda/derecha)
+         * - Puntos conectores en cada paso
+         * - Flechas direccionales hacia el centro
+         * - Completamente responsive
+         * 
+         * Representa: Metodología de trabajo de 5 pasos
+         */
+        .timeline {
+            position: relative;               /* Para posicionar línea central */
+            padding: 40px 0;                 /* Padding vertical del contenedor */
+            max-width: 1000px;               /* Ancho máximo para legibilidad */
+            margin: 0 auto;                  /* Centrado horizontal */
+        }
+        
+        /**
+         * LÍNEA CENTRAL TIMELINE - PSEUDO-ELEMENTO
+         * 
+         * Línea vertical central que conecta todos los elementos
+         * del timeline, creando el eje visual principal
+         */
+        .timeline::before {
+            content: '';                     /* Pseudo-elemento vacío */
+            position: absolute;              /* Posicionamiento absoluto */
+            left: 50%;                      /* Centrado horizontalmente */
+            top: 0;                         /* Desde arriba */
+            bottom: 0;                      /* Hasta abajo */
+            width: 4px;                     /* Grosor de la línea */
+            background: var(--secondary);   /* Color azul secundario */
+            transform: translateX(-50%);    /* Centrado perfecto */
+            z-index: 1;                     /* Por debajo de los elementos */
+        }
+        
+        /**
+         * ITEMS DEL TIMELINE
+         * 
+         * Cada elemento individual del proceso de trabajo
+         * con espaciado uniforme entre elementos
+         */
+        .timeline-item {
+            position: relative;              /* Para posicionar elementos hijos */
+            margin-bottom: 80px;            /* Separación entre elementos */
+            width: 100%;                    /* Ancho completo disponible */
+        }
+        
+        /**
+         * ELEMENTOS IMPARES - LADO IZQUIERDO
+         * 
+         * Posicionamiento de elementos impares (1, 3, 5)
+         * en el lado izquierdo del timeline
+         */
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-left: 0;                           /* Sin margen izquierdo */
+            margin-right: calc(50% + 40px);          /* Margen derecho calculado */
+            text-align: right;
+        }
+        
+        .timeline-item:nth-child(even) .timeline-content {
+            margin-left: calc(50% + 40px);
+            margin-right: 0;
+            text-align: left;
+        }
+        
+        .timeline-content {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 2;
+            transition: all 0.3s ease;
+        }
+        
+        .timeline-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+        
+        /* Timeline arrows */
+        .timeline-item:nth-child(odd) .timeline-content::after {
+            content: '';
+            position: absolute;
+            top: 30px;
+            right: -15px;
+            width: 0;
+            height: 0;
+            border: 15px solid transparent;
+            border-left-color: white;
+            z-index: 3;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content::after {
+            content: '';
+            position: absolute;
+            top: 30px;
+            left: -15px;
+            width: 0;
+            height: 0;
+            border: 15px solid transparent;
+            border-right-color: white;
+            z-index: 3;
+        }
+
+        .timeline-date {
+            background: var(--secondary);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 25px;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 20px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            z-index: 5;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+            border: 4px solid white;
+        }
+
+        /* Timeline dots */
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 35px;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            background: var(--accent);
+            border-radius: 50%;
+            border: 4px solid white;
+            z-index: 4;
+            box-shadow: 0 0 0 4px var(--secondary);
+        }
+
+        /* Responsive timeline */
+        @media (max-width: 768px) {
+            .timeline::before {
+                left: 30px;
+                transform: none;
+            }
+            
+            .timeline-item::before {
+                left: 30px;
+                transform: none;
+            }
+            
+            .timeline-date {
+                left: 80px;
+                transform: none;
+                font-size: 0.9rem;
+                padding: 8px 16px;
+            }
+            
+            .timeline-item:nth-child(odd) .timeline-content,
+            .timeline-item:nth-child(even) .timeline-content {
+                margin-left: 80px;
+                margin-right: 0;
+                text-align: left;
+            }
+            
+            .timeline-item:nth-child(odd) .timeline-content::after,
+            .timeline-item:nth-child(even) .timeline-content::after {
+                content: '';
+                position: absolute;
+                top: 30px;
+                left: -15px;
+                right: auto;
+                width: 0;
+                height: 0;
+                border: 15px solid transparent;
+                border-right-color: white;
+                border-left-color: transparent;
+            }
+            
+            .timeline-item {
+                margin-bottom: 60px;
+            }
+        }
+        
+        /* Enhanced timeline content styling */
+        .timeline-content h4 {
+            color: var(--primary);
+            font-weight: 700;
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+
+        .timeline-content p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .timeline-content .badge {
+            font-size: 0.85rem;
+            padding: 6px 12px;
+            margin: 2px;
+            background: var(--gradient) !important;
+            border: none;
+        }
+        
+        /* Contact Form */
+        .contact-form {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .form-control {
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            padding: 12px 15px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus {
+            border-color: var(--secondary);
+            box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
+        }
+        
+        /* Section Titles */
+        .section-title {
+            position: relative;
+            padding-bottom: 20px;
+            margin-bottom: 50px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 2.5rem;
+            color: var(--primary);
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--gradient);
+            border-radius: 2px;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            color: #666;
+            font-size: 1.2rem;
+            margin-bottom: 50px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* ================================================= */
+        /* 12. FOOTER - PIE DE PÁGINA STICKY                */
+        /* ================================================= */
+        
+        /**
+         * FOOTER PRINCIPAL - STICKY FOOTER IMPLEMENTATION
+         * 
+         * Footer que permanece siempre al final de la página
+         * independientemente del contenido. Utiliza las siguientes
+         * propiedades clave para el comportamiento sticky:
+         * 
+         * - margin-top: auto - Empuja el footer hacia abajo
+         * - flex-shrink: 0 - Evita que el footer se comprima
+         * - Parte del sistema flexbox definido en body
+         * 
+         * Contenido del footer:
+         * - Información de contacto
+         * - Enlaces rápidos
+         * - Redes sociales
+         * - Información corporativa
+         */
+        footer {
+            background: var(--gradient);    /* Gradiente corporativo */
+            color: white;                  /* Texto blanco para contraste */
+            padding: 60px 0 30px;         /* Padding asimétrico (más arriba) */
+            margin-top: auto;             /* CLAVE: Empuja footer hacia abajo */
+            position: relative;           /* Para posicionar elementos hijos */
+            flex-shrink: 0;              /* CLAVE: No permite compresión */
+        }
+        
+        /**
+         * TÍTULOS DE SECCIÓN DEL FOOTER
+         * 
+         * Estilos para los encabezados de cada columna del footer
+         */
+        .footer-section h3 {
+            margin-bottom: 20px;          /* Separación del contenido */
+            font-weight: 600;             /* Peso semi-bold */
+        }
+        
+        /**
+         * ICONOS SOCIALES - ESTILO BASE
+         * 
+         * Iconos de redes sociales con diseño circular
+         * y efectos de hover. Implementa un patrón consistente
+         * para todos los iconos sociales del sitio
+         */
+        .social-icon {
+            color: var(--primary);        /* Color principal del brand */
+            font-size: 1.5rem;           /* Tamaño destacado */
+            margin-right: 15px;          /* Separación entre iconos */
+            transition: all 0.3s ease;   /* Transición suave */
+            display: inline-block;        /* Para aplicar padding */
+            text-decoration: none;        /* Sin subrayado */
+            padding: 8px;                /* Área de click generosa */
+            border-radius: 50%;          /* Forma circular */
+            width: 40px;                 /* Ancho fijo */
+            height: 40px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+            border: 2px solid transparent;
+        }
+        
+        .social-icon:hover {
+            color: white;
+            background: var(--gradient);
+            transform: translateY(-3px) scale(1.1);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            border-color: var(--secondary);
+        }
+        
+        /* Footer social icons - different styling */
+        footer .social-icon {
+            color: white;
+            background: rgba(255,255,255,0.1);
+            border-color: rgba(255,255,255,0.2);
+        }
+        
+        footer .social-icon:hover {
+            color: var(--primary);
+            background: white;
+            border-color: white;
+        }
+        
+        /* Process Section */
+        .process-section {
+            background: var(--gradient);
+            color: white;
+            padding: 80px 0;
+            margin: 60px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .process-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="rgba(255,255,255,0.05)"><path d="M0,0 Q250,50 500,25 T1000,0 L1000,100 L0,100 Z"/></svg>') no-repeat bottom;
+            background-size: cover;
+        }
+
+        .process-timeline {
+            position: relative;
+            z-index: 2;
+            padding-top: 30px; /* Agregué padding superior */
+        }
+
+        .process-step {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 50px 25px 30px; /* Aumenté el padding-top para dar espacio al número */
+            text-align: center;
+            height: 100%;
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: visible; /* Cambié de hidden a visible */
+            margin-top: 25px; /* Agregué margen superior para que el número tenga espacio */
+        }
+
+        .process-step::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--warning), var(--info));
+            border-radius: 20px 20px 0 0; /* Agregué border-radius para que coincida con la tarjeta */
+        }
+
+        .process-step:hover {
+            transform: translateY(-10px);
+            background: rgba(255,255,255,0.15);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .process-number {
+            position: absolute;
+            top: -15px; /* Reducí de -20px a -15px */
+            right: 20px;
+            background: var(--accent);
+            color: white;
+            width: 45px; /* Aumenté el tamaño */
+            height: 45px; /* Aumenté el tamaño */
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.3rem; /* Aumenté el tamaño de fuente */
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+            border: 3px solid white; /* Agregué borde blanco para mejor visibilidad */
+            z-index: 10; /* Agregué z-index alto */
+        }
+
+        /* También necesito ajustar la sección contenedora para dar más espacio */
+        .process-timeline {
+            position: relative;
+            z-index: 2;
+            padding-top: 30px; /* Agregué padding superior */
+        }
+
+        /* Responsive para móviles */
+        @media (max-width: 768px) {
+            .process-step {
+                margin-bottom: 50px; /* Aumenté el margen inferior */
+                margin-top: 30px; /* Aumenté el margen superior */
+                padding: 45px 20px 25px; /* Ajusté el padding */
+            }
+            
+            .process-number {
+                top: -12px;
+                right: 15px;
+                width: 40px;
+                height: 40px;
+                font-size: 1.1rem;
+                border: 2px solid white; /* Borde más delgado en móvil */
+            }
+            
+            .process-timeline {
+                padding-top: 25px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .process-step {
+                margin-top: 35px;
+                padding: 40px 15px 20px;
+            }
+            
+            .process-number {
+                top: -10px;
+                right: 10px;
+                width: 35px;
+                height: 35px;
+                font-size: 1rem;
+            }
+        }
+        
+        /* Testimonials Section */
+        .testimonials-section {
+            background: #f8f9fa;
+            padding: 80px 0;
+            margin: 60px 0;
+        }
+        
+        .testimonial-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            margin: 20px 0;
+            border: 1px solid #e9ecef;
+            transition: all 0.3s ease;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+        }
+        
+        .testimonial-content {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .stars {
+            font-size: 1.2rem;
+        }
+        
+        .testimonial-quote {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #555;
+            font-style: italic;
+            margin: 0;
+            position: relative;
+        }
+        
+        .testimonial-quote::before {
+            content: '"';
+            font-size: 4rem;
+            color: var(--secondary);
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            font-family: serif;
+            opacity: 0.3;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+        
+        .author-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--secondary);
+        }
+        
+        .author-info {
+            text-align: left;
+        }
+        
+        .author-name {
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+        
+        .author-position {
+            color: #666;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+        }
+        
+        .company-logo .badge {
+            font-size: 0.8rem;
+            padding: 5px 10px;
+        }
+        
+        /* Carousel Controls */
+        .carousel-control-prev,
+        .carousel-control-next {
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            border-radius: 50%;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 0.8;
+            transition: all 0.3s ease;
+        }
+        
+        .carousel-control-prev {
+            left: -60px;
+        }
+        
+        .carousel-control-next {
+            right: -60px;
+        }
+        
+        .carousel-control-prev:hover,
+        .carousel-control-next:hover {
+            opacity: 1;
+            background: var(--secondary);
+        }
+        
+        .carousel-indicators {
+            bottom: -50px;
+        }
+        
+        .carousel-indicators button {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--secondary);
+            opacity: 0.5;
+            border: none;
+        }
+        
+        .carousel-indicators button.active {
+            opacity: 1;
+            background: var(--primary);
+        }
+        
+        /* Client Logos */
+        .clients-section {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        
+        .clients-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 30px;
+            align-items: center;
+            margin-top: 30px;
+        }
+        
+        .client-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            opacity: 0.7;
+        }
+        
+        .client-logo:hover {
+            opacity: 1;
+            transform: scale(1.05);
+            background: #f8f9fa;
+        }
+        
+        /* Satisfaction Statistics */
+        .satisfaction-stat {
+            padding: 30px 20px;
+            text-align: center;
+        }
+        
+        .stat-icon {
+            background: var(--gradient);
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 2rem;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .satisfaction-stat:hover .stat-icon {
+            transform: scale(1.1);
+        }
+
+        .satisfaction-stat .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .satisfaction-stat .stat-label {
+            color: #666;
+            font-weight: 500;
+        }
+
+        /* Process Section - Corregir color de duración */
+.process-duration {
+    background: rgba(255,255,255,0.1);
+    padding: 8px 15px;
+    border-radius: 20px;
+    color: var(--warning); /* Mantengo el color amarillo */
+    font-weight: 600;
+    font-size: 0.9rem;
+    display: inline-block;
+    border: 1px solid var(--warning); /* Agregué borde amarillo */
+    backdrop-filter: blur(5px);
+}
+
+.process-step:hover .process-duration {
+    background: rgba(243, 156, 18, 0.2); /* Fondo amarillo translúcido en hover */
+    color: var(--warning);
+    transform: scale(1.05);
+}
+
+.methodologies-section {
+    background: rgba(255,255,255,0.05);
+    border-radius: 20px;
+    padding: 40px 20px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.methodology-item {
+    padding: 20px;
+    transition: all 0.3s ease;
+}
+
+.methodology-item:hover {
+    transform: translateY(-5px);
+}
+
+/* También mejorar los iconos de metodología con colores apropiados */
+.methodology-item i.text-warning {
+    color: var(--warning) !important;
+}
+
+.methodology-item i.text-info {
+    color: var(--secondary) !important;
+}
+
+.methodology-item i.text-success {
+    color: var(--success) !important;
+}
+
+/* Agregar efecto de brillo al proceso-duration */
+.process-duration::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(243, 156, 18, 0.3), transparent);
+    transition: left 0.6s;
+    border-radius: 20px;
+}
+
+.process-duration {
+    position: relative;
+    overflow: hidden;
+}
+
+.process-step:hover .process-duration::before {
+    left: 100%;
+}
+
+/* Responsive - mantener el color amarillo en móviles */
+@media (max-width: 768px) {
+    .process-duration {
+        font-size: 0.8rem;
+        padding: 6px 12px;
+        color: var(--warning);
+        border-color: var(--warning);
+    }
+}
+
+@media (max-width: 576px) {
+    .process-duration {
+        font-size: 0.75rem;
+        padding: 5px 10px;
+    }
+}
+
+/* Agregar al final del archivo o reemplazar las media queries existentes */
+
+/* ===== MEJORAS DE RESPONSIVIDAD PARA MÓVILES ===== */
+
+/* Base responsive improvements */
+@media (max-width: 1200px) {
+    .container {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    
+    .section-title {
+        font-size: 2.2rem;
+    }
+}
+
+/* Tablet improvements */
+@media (max-width: 992px) {
+    .hero-section {
+        padding: 100px 0;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .section-subtitle {
+        font-size: 1.1rem;
+    }
+    
+    /* Process cards en tablet */
+    .process-step {
+        margin-bottom: 40px;
+        padding: 40px 20px 25px;
+    }
+    
+    /* Timeline ajustes para tablet */
+    .timeline-content {
+        padding: 25px;
+    }
+    
+    /* Team cards mejor spacing */
+    .team-member-img {
+        width: 120px;
+        height: 120px;
+    }
+}
+
+/* =============================================================== */
+/* 14. RESPONSIVIDAD MÓVIL - MOBILE FIRST APPROACH               */
+/* =============================================================== */
+
+/**
+ * BREAKPOINT PRINCIPAL MÓVIL (768px y menor)
+ * 
+ * Enfoque Mobile-First: Optimiza la experiencia para dispositivos móviles
+ * 
+ * Estrategias implementadas:
+ * - Reducción de tamaños de fuente
+ * - Ajuste de espaciados y padding
+ * - Simplificación de layouts complejos
+ * - Optimización de navegación para touch
+ * - Mejora de área de click en botones
+ * 
+ * Dispositivos objetivo:
+ * - Smartphones en orientación vertical y horizontal
+ * - Tablets pequeñas
+ * - Dispositivos con ancho <= 768px
+ */
+@media (max-width: 768px) {
+    
+    /* ================================ */
+    /* TIPOGRAFÍA MÓVIL                 */
+    /* ================================ */
+    
+    /**
+     * TÍTULOS DE SECCIÓN - RESPONSIVOS
+     * 
+     * Reducción proporcional del tamaño de fuente
+     * para mantener legibilidad en pantallas pequeñas
+     */
+    .section-title {
+        font-size: 1.8rem;            /* Reducido desde 2.5rem */
+        margin-bottom: 30px;          /* Espaciado compacto */
+    }
+    
+    /**
+     * SUBTÍTULOS DE SECCIÓN - COMPACTOS
+     * 
+     * Ajuste de tamaño y padding lateral para
+     * mejor lectura en dispositivos móviles
+     */
+    .section-subtitle {
+        font-size: 1rem;              /* Tamaño estándar móvil */
+        margin-bottom: 30px;          /* Espaciado reducido */
+        padding: 0 15px;              /* Padding lateral para respiración */
+    }
+    
+    /* ================================ */
+    /* HERO SECTION - MÓVIL             */
+    /* ================================ */
+    
+    /**
+     * HERO RESPONSIVO
+     * 
+     * Padding reducido para aprovechar mejor el espacio
+     * vertical limitado en dispositivos móviles
+     */
+    .hero-section {
+        padding: 80px 0;              /* Reducido desde 120px */
+        text-align: center;           /* Centrado para mejor presentación */
+    }
+    
+    .hero-section .display-3 {
+        font-size: 2.2rem;
+    }
+    
+    .hero-section .lead {
+        font-size: 1.1rem;
+    }
+    
+    /* Botones hero responsive */
+    .cta-button,
+    .btn-outline-light {
+        width: 100%;
+        margin-bottom: 15px;
+        padding: 15px 20px;
+        font-size: 0.9rem;
+    }
+    
+    /* Stats section móvil */
+    .stats-section {
+        padding: 60px 0;
+    }
+    
+    .stat-number {
+        font-size: 2.2rem;
+    }
+    
+    .stat-label {
+        font-size: 1rem;
+    }
+    
+    /* MVV section móvil */
+    .mvv-section {
+        padding: 60px 0;
+    }
+    
+    .mvv-card {
+        margin-bottom: 30px;
+        padding: 30px 20px;
+    }
+    
+    .mvv-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 2rem;
+    }
+    
+    .mvv-title {
+        font-size: 1.5rem;
+    }
+    
+    .mvv-description {
+        font-size: 1rem;
+    }
+    
+    /* Team section móvil */
+    .team-member-img {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .role-badge {
+        font-size: 0.75rem;
+        padding: 6px 12px;
+    }
+    
+    /* Services móvil */
+    .service-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+    }
+    
+    /* Process section móvil mejorado */
+    .process-section {
+        padding: 60px 0;
+    }
+    
+    .process-step {
+        margin-bottom: 50px;
+        margin-top: 30px;
+        padding: 45px 20px 25px;
+    }
+    
+    .process-number {
+        top: -12px;
+        right: 15px;
+        width: 40px;
+        height: 40px;
+        font-size: 1.1rem;
+        border: 2px solid white;
+    }
+    
+    .process-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+    }
+    
+    .process-title {
+        font-size: 1.2rem;
+    }
+    
+    .process-description {
+        font-size: 0.9rem;
+    }
+    
+    .process-duration {
+        font-size: 0.8rem;
+        padding: 6px 12px;
+    }
+    
+    /* Methodologies móvil */
+    .methodologies-section {
+        padding: 30px 15px;
+    }
+    
+    .methodology-item {
+        padding: 15px;
+    }
+    
+    .methodology-item i {
+        font-size: 2.5rem !important;
+    }
+    
+    /* Timeline móvil mejorado */
+    .timeline {
+        padding: 20px 0;
+    }
+    
+    .timeline::before {
+        left: 25px;
+    }
+    
+    .timeline-item::before {
+        left: 25px;
+        width: 15px;
+        height: 15px;
+        top: 30px;
+    }
+    
+    .timeline-date {
+        left: 70px;
+        font-size: 0.8rem;
+        padding: 6px 12px;
+        top: 15px;
+    }
+    
+    .timeline-item:nth-child(odd) .timeline-content,
+    .timeline-item:nth-child(even) .timeline-content {
+        margin-left: 70px;
+        margin-right: 15px;
+        text-align: left;
+    }
+    
+    .timeline-content {
+        padding: 20px;
+    }
+    
+    .timeline-content h4 {
+        font-size: 1.2rem;
+    }
+    
+    .timeline-content p {
+        font-size: 0.9rem;
+    }
+    
+    /* Testimonials móvil */
+    .testimonials-section {
+                             padding: 60px 0;
+    }
+    
+    .testimonial-card {
+        padding: 30px 20px;
+        margin: 15px 0;
+    }
+    
+    .testimonial-quote {
+        font-size: 1rem;
+    }
+    
+    .testimonial-author {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+    
+    .author-info {
+        text-align: center;
+    }
+    
+    .author-img {
+        width: 60px;
+        height: 60px;
+    }
+    
+    /* Carousel controls móvil */
+    .carousel-control-prev,
+    .carousel-control-next {
+        display: none;
+    }
+    
+    .carousel-indicators {
+        bottom: -30px;
+    }
+    
+    /* Clients section móvil */
+    .clients-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+    
+    .client-logo {
+        padding: 15px;
+    }
+    
+    /* Satisfaction stats móvil */
+    .satisfaction-stat {
+        padding: 20px 10px;
+    }
+    
+    .satisfaction-stat .stat-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+    }
+    
+    .satisfaction-stat .stat-number {
+        font-size: 2rem;
+    }
+    
+    /* Contact form móvil */
+    .contact-form {
+        padding: 30px 20px;
+    }
+    
+    .form-control {
+        padding: 15px;
+        font-size: 1rem;
+    }
+    
+    /* Footer móvil */
+    footer {
+        padding: 40px 0 20px;
+        margin-top: auto;
+    }
+    
+    .footer-section {
+        margin-bottom: 30px;
+        text-align: center;
+    }
+    
+    .social-icon {
+        margin: 0 8px;
+    }
+}
+
+/* Móviles muy pequeños */
+@media (max-width: 576px) {
+    .container {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    
+    /* Typography extra small */
+    .section-title {
+        font-size: 1.6rem;
+    }
+    
+    .hero-section .display-3 {
+        font-size: 1.8rem;
+    }
+    
+    .hero-section .lead {
+        font-size: 1rem;
+    }
+    
+    /* Stats números más pequeños */
+    .stat-number {
+        font-size: 2rem;
+    }
+    
+    /* MVV cards más compactas */
+    .mvv-card {
+        padding: 25px 15px;
+    }
+    
+    .mvv-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+    }
+    
+    .mvv-title {
+        font-size: 1.3rem;
+    }
+    
+    /* Process más compacto */
+    .process-step {
+        margin-top: 35px;
+        padding: 40px 15px 20px;
+    }
+    
+    .process-number {
+        top: -10px;
+        right: 10px;
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
+    }
+    
+    .process-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.3rem;
+    }
+    
+    .process-title {
+        font-size: 1.1rem;
+    }
+    
+    /* Timeline más compacto */
+    .timeline-item:nth-child(odd) .timeline-content,
+    .timeline-item:nth-child(even) .timeline-content {
+        margin-left: 60px;
+        margin-right: 10px;
+    }
+    
+    .timeline-date {
+        left: 60px;
+        font-size: 0.7rem;
+        padding: 4px 8px;
+    }
+    
+    /* Clients grid single column */
+    .clients-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    /* Satisfaction stats compacto */
+    .satisfaction-stat .stat-number {
+        font-size: 1.8rem;
+    }
+    
+    .satisfaction-stat .stat-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.3rem;
+    }
+}
+
+/* Landscape móviles */
+@media (max-height: 500px) and (orientation: landscape) {
+    .hero-section {
+        padding: 60px 0;
+    }
+    
+    .stats-section,
+    .mvv-section,
+    .process-section,
+    .testimonials-section {
+        padding: 40px 0;
+    }
+}
+
+/* Fixes para elementos específicos que podrían causar overflow */
+* {
+    box-sizing: border-box;
+}
+
+.row {
+    margin-left: -10px;
+    margin-right: -10px;
+}
+
+.col,
+[class*="col-"] {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+/* Evitar overflow horizontal */
+body {
+    overflow-x: hidden;
+}
+
+.container-fluid {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Back to top button móvil */
+@media (max-width: 768px) {
+    .back-to-top {
+        bottom: 20px;
+        right: 20px;
+        width: 45px;
+        height: 45px;
+    }
+}
+
+
+/* ======================================================= */
+/* 13. MODAL DE CONTACTO - SISTEMA COMPLETO               */
+/* ======================================================= */
+
+/**
+ * CONTACT MODAL - MODAL DE CONTACTO PRINCIPAL
+ * 
+ * Modal fullscreen responsive para formulario de contacto
+ * Activado desde la sección de proyectos destacados
+ * 
+ * Características principales:
+ * - Diseño fullscreen adaptativo
+ * - Glass morphism con gradientes sutiles
+ * - Sistema de validación de formularios
+ * - Responsive en todos los dispositivos
+ * - Animaciones suaves de entrada/salida
+ * - Compatibilidad con Bootstrap 5.3.0
+ * 
+ * NOTA: Clases renombradas para evitar conflictos con footer
+ */
+.contact-modal {
+    border: none;                                           /* Diseño limpio sin bordes */
+    border-radius: 20px;                                   /* Bordes redondeados modernos */
+    overflow: hidden;                                      /* Contenido sin desbordamiento */
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);             /* Sombra profunda para impacto */
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%); /* Gradiente sutil de fondo */
+    width: 100% !important;                               /* Ancho completo forzado */
+    max-width: none !important;                           /* Sin limitación de ancho máximo */
+}
+
+/**
+ * MODAL CONTENT - CONTENEDOR DE CONTENIDO
+ * 
+ * Asegura que el contenido del modal utilice
+ * todo el ancho disponible de la pantalla
+ */
+.contact-modal .modal-content {
+    width: 100% !important;                               /* Forzar ancho completo */
+    max-width: none !important;                           /* Sin restricción de ancho */
+}
+
+/* Modal dialog improvements - Uso completo de pantalla */
+.modal-dialog.modal-lg {
+    max-width: 95vw;
+    width: 95vw;
+    margin: 1rem auto;
+    height: auto;
+}
+
+/* Optimizar para pantallas extra grandes */
+@media (min-width: 1400px) {
+    .modal-dialog.modal-lg {
+        max-width: 1320px;
+        width: 1320px;
+    }
+}
+
+/* Pantallas grandes (escritorio) */
+@media (min-width: 1200px) and (max-width: 1399px) {
+    .modal-dialog.modal-lg {
+        max-width: 1140px;
+        width: 1140px;
+    }
+}
+
+/* Pantallas medianas */
+@media (min-width: 992px) and (max-width: 1199px) {
+    .modal-dialog.modal-lg {
+        max-width: 950px;
+        width: 950px;
+    }
+}
+
+/* Tablets */
+@media (min-width: 768px) and (max-width: 991px) {
+    .modal-dialog.modal-lg {
+        max-width: 95vw;
+        width: 95vw;
+        margin: 1rem auto;
+    }
+}
+
+/* Móviles */
+@media (max-width: 767px) {
+    .modal-dialog.modal-lg {
+        max-width: 98vw;
+        width: 98vw;
+        margin: 0.5rem auto;
+    }
+}
+
+.contact-modal .modal-header {
+    background: var(--gradient);
+    color: white;
+    padding: 30px 40px 25px;
+    position: relative;
+    overflow: hidden;
+    border-bottom: none;
+    border-radius: 20px 20px 0 0;
+}
+
+.contact-modal .modal-content {
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.25);
+    overflow: hidden;
+    width: 100% !important;
+    max-width: none !important;
+}
+
+.contact-modal .modal-body {
+    padding: 40px;
+}
+
+/* Asegurar que el modal tenga altura mínima adecuada */
+.contact-modal .modal-dialog {
+    min-height: calc(100vh - 2rem);
+    display: flex;
+    align-items: center;
+}
+
+/* Backdrop más suave */
+.modal-backdrop {
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px);
+}
+
+.contact-modal .modal-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="rgba(255,255,255,0.1)"><path d="M0,0 Q250,50 500,25 T1000,0 L1000,100 L0,100 Z"/></svg>') no-repeat bottom;
+    background-size: cover;
+}
+
+.modal-title-section {
+    position: relative;
+    z-index: 2;
+}
+
+.contact-modal .modal-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: white;
+}
+
+.modal-subtitle {
+    font-size: 1rem;
+    opacity: 0.9;
+    color: rgba(255,255,255,0.95);
+}
+
+.btn-close-custom {
+    background: rgba(255,255,255,0.2);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 3;
+}
+
+.btn-close-custom:hover {
+    background: rgba(255,255,255,0.3);
+    transform: scale(1.1);
+    color: white;
+}
+
+.contact-modal .modal-body {
+    padding: 40px;
+    max-height: 70vh;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--secondary) transparent;
+}
+
+.contact-modal .modal-body::-webkit-scrollbar {
+    width: 6px;
+}
+
+.contact-modal .modal-body::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.contact-modal .modal-body::-webkit-scrollbar-thumb {
+    background: var(--secondary);
+    border-radius: 3px;
+}
+
+.form-section-title {
+    color: var(--primary);
+    font-weight: 600;
+    border-bottom: 2px solid var(--secondary);
+    padding-bottom: 8px;
+    margin-bottom: 20px;
+}
+
+.contact-modal-form .form-label {
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+}
+
+/**
+ * FORMULARIOS ELEGANTES - CONTROLES AVANZADOS
+ * 
+ * Sistema de campos de formulario con diseño premium:
+ * - Bordes redondeados y suaves
+ * - Efectos de hover y focus refinados
+ * - Transiciones fluidas en todas las interacciones
+ * - Compatibilidad con estados de validación
+ */
+
+/**
+ * Campo de entrada base elegante
+ * 
+ * Características técnicas:
+ * - Borde más grueso (2px) para mayor definición
+ * - Bordes redondeados generosos (10px)
+ * - Padding interno generoso para comodidad
+ * - Transiciones suaves en todas las propiedades
+ * - Fondo blanco sólido para claridad
+ */
+.form-control-elegant {
+    border: 2px solid #e9ecef;         /* Borde gris claro suave */
+    border-radius: 10px;              /* Esquinas redondeadas */
+    padding: 12px 15px;               /* Padding interno confortable */
+    font-size: 1rem;                  /* Tamaño de texto estándar */
+    transition: all 0.3s ease;        /* Transiciones suaves */
+    background: white;                /* Fondo blanco limpio */
+}
+
+/**
+ * Estado de focus - Activación del campo
+ * 
+ * Al hacer clic o navegar al campo:
+ * - Borde cambia al color secundario (azul)
+ * - Box-shadow sutil con el mismo color
+ * - Mantiene fondo blanco para legibilidad
+ */
+.form-control-elegant:focus {
+    border-color: var(--secondary);   /* Borde azul activo */
+    box-shadow: 0 0 0 0.25rem rgba(52, 152, 219, 0.15); /* Halo azul suave */
+    background: white;                /* Fondo consistente */
+}
+
+/**
+ * Estado de hover - Interacción previa
+ * 
+ * Al pasar el mouse sobre el campo:
+ * - Borde se prepara con color secundario
+ * - Indica interactividad sin sobrecargar
+ */
+.form-control-elegant:hover {
+    border-color: var(--secondary);   /* Preview del estado activo */
+}
+
+.form-check-elegant {
+    padding-left: 1.8rem;
+}
+
+.form-check-elegant .form-check-input {
+    width: 1.2rem;
+    height: 1.2rem;
+    margin-top: 0.1rem;
+    border-radius: 4px;
+    border: 2px solid #dee2e6;
+    transition: all 0.3s ease;
+}
+
+.form-check-elegant .form-check-input:checked {
+    background-color: var(--secondary);
+    border-color: var(--secondary);
+}
+
+.form-check-elegant .form-check-input:focus {
+    box-shadow: 0 0 0 0.25rem rgba(52, 152, 219, 0.15);
+}
+
+.form-check-elegant .form-check-label {
+    font-size: 0.95rem;
+    color: #555;
+    margin-left: 8px;
+}
+
+.contact-modal .modal-footer {
+    padding: 25px 40px 35px;
+    background: #f8f9fa;
+    border-top: none;
+}
+
+/* CLASES RENOMBRADAS PARA EVITAR CONFLICTO CON FOOTER */
+.modal-footer-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.modal-footer-info {
+    display: flex;
+    align-items: center;
+}
+
+.modal-footer-actions {
+    display: flex;
+    gap: 10px;
+}
+
+/* Animaciones del modal */
+.modal.fade .modal-dialog {
+    transform: scale(0.8) translateY(-50px);
+    transition: all 0.3s ease;
+}
+
+.modal.show .modal-dialog {
+    transform: scale(1) translateY(0);
+}
+
+/**
+ * SISTEMA DE VALIDACIÓN DE FORMULARIOS
+ * 
+ * Estados visuales para retroalimentación inmediata:
+ * - Validación en tiempo real
+ * - Colores semánticos del brand
+ * - Feedback textual complementario
+ * - Integración con Bootstrap validation
+ */
+
+/**
+ * Estado de error/invalidación
+ * 
+ * Aplicado automáticamente cuando:
+ * - Campo requerido está vacío
+ * - Formato de email incorrecto
+ * - Validación personalizada falla
+ * - Utiliza color accent (rojo) del sistema
+ */
+.form-control-elegant.is-invalid {
+    border-color: var(--accent);      /* Borde rojo de error */
+    box-shadow: 0 0 0 0.25rem rgba(231, 76, 60, 0.15); /* Halo rojo suave */
+}
+
+/**
+ * Estado de éxito/válido
+ * 
+ * Aplicado automáticamente cuando:
+ * - Campo cumple todos los criterios
+ * - Validación es exitosa
+ * - Formato es correcto
+ * - Utiliza color success (verde) del sistema
+ */
+.form-control-elegant.is-valid {
+    border-color: var(--success);     /* Borde verde de éxito */
+    box-shadow: 0 0 0 0.25rem rgba(46, 204, 113, 0.15); /* Halo verde suave */
+}
+
+/**
+ * Mensaje de error personalizado
+ * 
+ * Texto explicativo que aparece bajo campos inválidos:
+ * - Siempre visible (display: block)
+ * - Color coherente con el estado de error
+ * - Tamaño reducido para no competir con el campo
+ * - Espaciado superior para separación visual
+ */
+.invalid-feedback {
+    display: block;                   /* Siempre visible */
+    color: var(--accent);             /* Color rojo consistente */
+    font-size: 0.875rem;              /* Ligeramente más pequeño */
+    margin-top: 5px;
+}
+
+.valid-feedback {
+    display: block;
+    color: var(--success);
+    font-size: 0.875rem;
+    margin-top: 5px;
+}
+
+/**
+ * ESTADOS DE CARGA - LOADING SPINNER
+ * 
+ * Sistema de indicadores visuales para procesos asíncronos:
+ * - Spinner animado para formularios
+ * - Deshabilitación temporal del botón
+ * - Feedback visual inmediato al usuario
+ */
+
+/**
+ * Botón en estado de carga
+ * - position: relative → Permite posicionar el pseudo-elemento
+ * - pointer-events: none → Desactiva toda interacción
+ * - Mantiene diseño visual mientras procesa
+ */
+.btn-loading {
+    position: relative;                 /* Contexto para el pseudo-elemento */
+    pointer-events: none;              /* Desactiva clics e interacciones */
+}
+
+/**
+ * Spinner animado con pseudo-elemento ::after
+ * 
+ * Implementación técnica:
+ * 1. Posicionamiento absoluto centrado
+ * 2. Círculo con bordes parcialmente transparentes
+ * 3. Rotación continua con animación linear
+ * 4. Tamaño optimizado para botones estándar
+ */
+.btn-loading::after {
+    content: '';                       /* Elemento vacío requerido */
+    position: absolute;                /* Posicionamiento absoluto */
+    top: 50%;                         /* Centrado vertical */
+    left: 50%;                        /* Centrado horizontal */
+    transform: translate(-50%, -50%);  /* Ajuste fino del centrado */
+    width: 20px;                      /* Diámetro del spinner */
+    height: 20px;                     /* Mantiene proporción cuadrada */
+    border: 2px solid rgba(255,255,255,0.3);  /* Círculo base transparente */
+    border-top: 2px solid white;      /* Segmento visible (indicador) */
+    border-radius: 50%;               /* Forma circular perfecta */
+    animation: spin 1s linear infinite; /* Rotación continua */
+}
+
+/**
+ * KEYFRAME: SPIN ANIMATION
+ * 
+ * Rotación completa de 360 grados con centrado preservado
+ * - Duración: 1 segundo por ciclo
+ * - Easing: linear (velocidad constante)
+ * - Infinite: repetición continua
+ * - transform: mantiene centrado durante rotación
+ */
+@keyframes spin {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }     /* Posición inicial */
+    100% { transform: translate(-50%, -50%) rotate(360deg); } /* Rotación completa */
+}
+
+/* Responsive modal */
+/**
+ * RESPONSIVE MODAL - BREAKPOINT MÓVIL (≤ 768px)
+ * 
+ * Adaptaciones específicas para dispositivos móviles:
+ * - Reducción de padding para maximizar espacio útil
+ * - Limitación de altura del cuerpo del modal
+ * - Reorganización del footer para layout vertical
+ * - Optimización de la experiencia táctil
+ */
+@media (max-width: 768px) {
+    /**
+     * Header del modal en móvil
+     * - Padding reducido lateralmente (40px → 20px)
+     * - Mantiene padding vertical para breathing room
+     */
+    .contact-modal .modal-header {
+        padding: 25px 20px 20px;          /* Menos padding lateral */
+    }
+    
+    /**
+     * Cuerpo del modal en móvil
+     * - Padding uniforme reducido
+     * - max-height: 60vh para evitar overflow en pantallas pequeñas
+     * - Permite scroll interno si el contenido es extenso
+     */
+    .contact-modal .modal-body {
+        padding: 25px 20px;              /* Padding reducido y uniforme */
+        max-height: 60vh;                /* Límite de altura viewport */
+    }
+    
+    /**
+     * Footer del modal en móvil
+     * - Padding mínimo para elementos esenciales
+     * - Preparación para layout vertical
+     */
+    .contact-modal .modal-footer {
+        padding: 20px;                   /* Padding mínimo en móvil */
+    }
+    
+    /**
+     * Wrapper del footer - Layout vertical
+     * - Cambio de flex-direction para apilar elementos
+     * - Mejor uso del espacio disponible en móvil
+     */
+    .modal-footer-wrapper {
+        flex-direction: column;           /* Layout vertical en móvil */
+        gap: 15px;
+        align-items: stretch;
+    }
+    
+    .modal-footer-actions {
+        justify-content: center;
+    }
+    
+    .modal-footer-actions .btn {
+        flex: 1;
+        min-width: 120px;
+    }
+    
+    .contact-modal .modal-title {
+        font-size: 1.5rem;
+    }
+    
+    .modal-subtitle {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .modal-lg {
+        max-width: 95%;
+        margin: 1rem auto;
+    }
+    
+    .contact-modal .modal-header {
+        padding: 20px 15px 15px;
+    }
+    
+    .contact-modal .modal-body {
+        padding: 20px 15px;
+    }
+    
+    .contact-modal .modal-footer {
+        padding: 15px;
+    }
+}
+
+/* =============================================================== */
+/* DOCUMENTACIÓN FINAL Y MEJORES PRÁCTICAS                        */
+/* =============================================================== */
+
+/**
+ * RESUMEN DE CARACTERÍSTICAS PRINCIPALES
+ * =====================================
+ * 
+ * 1. ARQUITECTURA CSS:
+ *    - Variables CSS para consistencia de colores
+ *    - Metodología Mobile-First responsive
+ *    - Sticky Footer con Flexbox layout
+ *    - Glass Morphism design patterns
+ * 
+ * 2. COMPONENTES IMPLEMENTADOS:
+ *    - Navbar con efectos de scroll y dropdown
+ *    - Hero section con gradientes y overlays
+ *    - Estadísticas con contadores animados
+ *    - Cards de equipo y servicios con hover effects
+ *    - Timeline de proceso de trabajo
+ *    - Modal de contacto full-featured
+ *    - Footer sticky con redes sociales
+ * 
+ * 3. EFECTOS VISUALES:
+ *    - Transiciones CSS3 personalizadas
+ *    - Animaciones keyframes
+ *    - Efectos shimmer en navegación
+ *    - Hover states interactivos
+ *    - Box shadows para profundidad
+ *    - Gradientes corporativos
+ * 
+ * 4. RESPONSIVIDAD:
+ *    - Breakpoint principal: 768px
+ *    - Optimización para touch devices
+ *    - Tipografía escalable
+ *    - Layouts flexibles con CSS Grid y Flexbox
+ * 
+ * 5. COMPATIBILIDAD:
+ *    - Bootstrap 5.3.0 integration
+ *    - Bootstrap Icons support
+ *    - AOS (Animate On Scroll) ready
+ *    - Webkit prefixes para compatibilidad
+ * 
+ * 6. RENDIMIENTO:
+ *    - CSS optimizado para velocidad
+ *    - Selectores eficientes
+ *    - Transiciones hardware-accelerated
+ *    - Minimal reflow/repaint operations
+ * 
+ * MANTENIMIENTO Y EXTENSIBILIDAD:
+ * ==============================
+ * 
+ * - Usar variables CSS para nuevos colores
+ * - Mantener el patrón de documentación establecido
+ * - Respetar la estructura modular por secciones
+ * - Probar cambios en todos los breakpoints
+ * - Validar compatibilidad cross-browser
+ * 
+ * CRÉDITOS:
+ * ========
+ * - Framework: Bootstrap 5.3.0
+ * - Icons: Bootstrap Icons
+ * - Animations: AOS Library + Custom CSS
+ * - Design Pattern: Glass Morphism + Corporate Modern
+ * 
+ * Última actualización: Septiembre 2025
+ */
+}
